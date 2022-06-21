@@ -1,10 +1,12 @@
-import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
-import { typeDefs, resolvers } from './schemas';
-
+const express = require('express');
+// const { ApolloServer } = require('apollo-server-express');
+// const { typeDefs, resolvers } = require('./schemas');
+const api = require('./routes');
+// express setup
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+// graphql server setup
 const startServer = async () => {
   const server = new ApolloServer({
     typeDefs,
@@ -15,8 +17,9 @@ const startServer = async () => {
   console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
 };
 
-startServer();
+// startServer();
 
+// express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
