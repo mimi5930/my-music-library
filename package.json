@@ -1,0 +1,28 @@
+{
+  "name": "my-music-library",
+  "version": "1.0.0",
+  "description": "Personal music catalogue and organizer",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mimi5930/my-music-library.git"
+  },
+  "author": "mimi5930",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mimi5930/my-music-library/issues"
+  },
+  "homepage": "https://github.com/mimi5930/my-music-library#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "node-fetch": "^3.2.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
