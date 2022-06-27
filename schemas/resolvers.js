@@ -8,6 +8,13 @@ const resolvers = {
       );
       const data = await composerData.json();
       return data;
+    },
+    works: async (parent, { compId, title }) => {
+      const workData = await fetch(
+        `https://api.openopus.org/work/list/composer/${compId}/genre/all/search/${title}.json`
+      );
+      const data = await workData.json();
+      return data;
     }
   }
 };

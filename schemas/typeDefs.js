@@ -14,6 +14,7 @@ const typeDefs = gql`
   type Request {
     type: String
     item: String
+    search: String
   }
 
   type Composers {
@@ -26,14 +27,32 @@ const typeDefs = gql`
     portrait: String
   }
 
+  type Works {
+    title: String
+    subtitle: String
+    searchterms: String
+    popular: Int
+    recommended: Int
+    id: ID
+    genre: String
+  }
+
   type Composer {
     status: Status
     request: Request
-    composers: [Composers!]
+    composers: [Composers]
+  }
+
+  type Work {
+    status: Status
+    request: Request
+    composer: Composers
+    works: [Works]
   }
 
   type Query {
     composer(name: String!): Composer
+    works(compId: String!, title: String!): Work
   }
 `;
 
