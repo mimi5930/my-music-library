@@ -1,12 +1,11 @@
-const { response } = require('express');
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schemas');
-// const api = require('./routes');
+const db = require('./config/connection');
+
 // express setup
 const PORT = process.env.PORT || 3001;
 const app = express();
-const fetch = require('node-fetch');
 
 // graphql server setup
 const startServer = async () => {
@@ -25,6 +24,8 @@ startServer();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 });

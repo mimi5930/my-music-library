@@ -19,8 +19,10 @@
   "homepage": "https://github.com/mimi5930/my-music-library#readme",
   "dependencies": {
     "apollo-server-express": "^3.9.0",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "graphql": "^16.5.0",
+    "mongoose": "^6.4.1",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
