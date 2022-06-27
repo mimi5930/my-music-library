@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Violin Sonata no. 21 in E minor, K.304",
+    "subtitle": "",
+    "id": "23563",
+    "genre": "Chamber",
+    "composer": {
+      "id": "196",
+      "name": "Mozart",
+      "epoch": "Classical",
+      "birth": "1756-01-01",
+      "death": "1791-01-01",
+      "complete_name": "Wolfgang Amadeus Mozart",
+      "portrait": "https://assets.openopus.org/portraits/21459195-1568084925.jpg"
+    }
+  },
+  {
+    "title": "Clarinet Concerto in A major, K.622",
+    "subtitle": "",
+    "id": "23629",
+    "genre": "Orchestral",
+    "composer": {
+      "id": "196",
+      "name": "Mozart",
+      "epoch": "Classical",
+      "birth": "1756-01-01",
+      "death": "1791-01-01",
+      "complete_name": "Wolfgang Amadeus Mozart",
+      "portrait": "https://assets.openopus.org/portraits/21459195-1568084925.jpg"
+    }
+  },
+  {
+    "title": "String Quartet no. 14 in C sharp minor, op. 131",
+    "subtitle": "",
+    "id": "16259",
+    "genre": "Chamber",
+    "composer": {
+      "id": "145",
+      "name": "Beethoven",
+      "complete_name": "Ludwig van Beethoven",
+      "birth": "1770-01-01",
+      "death": "1827-01-01",
+      "epoch": "Early Romantic",
+      "portrait": "https://assets.openopus.org/portraits/55910756-1568084860.jpg"
+    }
+  },
+  {
+    "title": "Violin Concerto in D major, op. 61",
+    "subtitle": "",
+    "id": "16458",
+    "genre": "Orchestral",
+    "composer": {
+      "id": "145",
+      "name": "Beethoven",
+      "complete_name": "Ludwig van Beethoven",
+      "birth": "1770-01-01",
+      "death": "1827-01-01",
+      "epoch": "Early Romantic",
+      "portrait": "https://assets.openopus.org/portraits/55910756-1568084860.jpg"
+    }
+  }
+]
