@@ -1,18 +1,15 @@
 const { Schema, model } = require('mongoose');
 
 const workSchema = new Schema({
-  id: String,
+  id: { type: String, required: true, unique: true },
+  title: String,
+  subtitle: String,
   composer: {
     id: String,
     name: String,
-    epoch: String,
-    birth: String,
-    death: String,
     complete_name: String,
-    portrait: String
+    epoch: String
   },
-  title: String,
-  subtitle: String,
   genre: String,
   added: {
     type: Date,

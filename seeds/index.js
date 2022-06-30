@@ -11,6 +11,8 @@ db.once('open', async () => {
 
   console.log('Deleted existing db data');
 
+  return;
+
   // insert various works
   const worksData = await Work.insertMany(works);
 

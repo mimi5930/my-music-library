@@ -21,10 +21,7 @@ const typeDefs = gql`
     id: ID
     name: String
     complete_name: String
-    birth: String
-    death: String
     epoch: String
-    portrait: String
   }
 
   type Works {
@@ -35,6 +32,15 @@ const typeDefs = gql`
     recommended: Int
     id: ID
     genre: String
+  }
+
+  type CollectedWorks {
+    title: String
+    recommended: Int
+    id: ID
+    genre: String
+    composer: Composers
+    added: String
   }
 
   type Composer {
@@ -53,6 +59,12 @@ const typeDefs = gql`
   type Query {
     composer(name: String!): Composer
     works(compId: String!, title: String!): Work
+    dbWorks: [CollectedWorks]
+  }
+
+  type Mutation {
+    addWork(workId: String!): CollectedWorks
+    removeWork(workId: String!): CollectedWorks
   }
 `;
 
