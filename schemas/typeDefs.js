@@ -36,6 +36,7 @@ const typeDefs = gql`
 
   type CollectedWorks {
     title: String
+    subtitle: String
     id: ID
     genre: String
     composer: Composers
@@ -61,6 +62,8 @@ const typeDefs = gql`
     dbWorks: [CollectedWorks]
     dbComposerId(compId: String!): [CollectedWorks]
     dbComposerName(name: String!): [CollectedWorks]
+    dbWorkId(workId: String!): CollectedWorks
+    dbWorkTitle(title: String!): [CollectedWorks]
   }
 
   type Mutation {

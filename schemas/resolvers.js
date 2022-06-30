@@ -47,9 +47,32 @@ const resolvers = {
       } catch (e) {
         return e;
       }
-    }
-
+    },
     // query piece in db by work id
+    dbWorkId: async (parent, { workId }) => {
+      try {
+        const workDbResponse = await Work.find({
+          id: workId
+        });
+        return workDbResponse[0];
+      } catch (e) {
+        return e;
+      }
+    },
+    // query pieces in db by title
+    dbWorkTitle: async (parent, { title }) => {
+      try {
+        const workDbResponse = await Work.find({
+          $or: [
+            { title: new RegExp(title, 'i') },
+            { subtitle: new RegExp(title, 'i') }
+          ]
+        });
+        return workDbResponse;
+      } catch (e) {
+        return e;
+      }
+    }
   },
   Mutation: {
     // add a piece by id
