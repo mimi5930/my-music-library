@@ -27,7 +27,29 @@ const resolvers = {
       } catch (e) {
         return e;
       }
+    },
+    // query db for all works by composer id
+    dbComposerId: async (parent, { compId }) => {
+      try {
+        const workDbResponse = await Work.find({ 'composer.id': compId });
+        return workDbResponse;
+      } catch (e) {
+        return e;
+      }
+    },
+    // query db for all works by composer name
+    dbComposerName: async (parent, { name }) => {
+      try {
+        const workDbResponse = await Work.find({
+          'composer.complete_name': new RegExp(name, 'i')
+        });
+        return workDbResponse;
+      } catch (e) {
+        return e;
+      }
     }
+
+    // query piece in db by work id
   },
   Mutation: {
     // add a piece by id

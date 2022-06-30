@@ -59,6 +59,8 @@ const typeDefs = gql`
     composer(name: String!): Composer
     works(compId: String!, title: String!): Work
     dbWorks: [CollectedWorks]
+    dbComposerId(compId: String!): [CollectedWorks]
+    dbComposerName(name: String!): [CollectedWorks]
   }
 
   type Mutation {
