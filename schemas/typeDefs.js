@@ -36,7 +36,6 @@ const typeDefs = gql`
 
   type CollectedWorks {
     title: String
-    recommended: Int
     id: ID
     genre: String
     composer: Composers
