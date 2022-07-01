@@ -184,11 +184,24 @@ const resolvers = {
     // remove piece by id
     removeWork: async (parent, { workId }) => {
       try {
-        const deleteWorkResponse = await Work.findOneAndDelete(
+        const workDbResponse = await Work.findOneAndDelete(
           { id: workId },
           { new: true }
         );
-        return deleteWorkResponse;
+        return workDbResponse;
+      } catch (e) {
+        return e;
+      }
+    },
+
+    editGenre: async (parent, { workId, genre }) => {
+      try {
+        const workDbResponse = await Work.findOneAndUpdate(
+          { id: workId },
+          { genre: genre },
+          { new: true }
+        );
+        return workDbResponse;
       } catch (e) {
         return e;
       }

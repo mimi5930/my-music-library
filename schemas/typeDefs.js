@@ -81,6 +81,7 @@ const typeDefs = gql`
       genre: String!
     ): CollectedWorks
     removeWork(workId: String!): CollectedWorks
+    editGenre(workId: String!, genre: String!): CollectedWorks
   }
 `;
 
