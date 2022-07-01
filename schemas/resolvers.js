@@ -105,6 +105,82 @@ const resolvers = {
       }
     },
 
+    // manually add piece
+    customWork: async (
+      parent,
+      { title, genre, compName, compComplete_name, epoch }
+    ) => {
+      // create an id for the work
+      let workId =
+        '9' + String(Math.floor(Math.random() * 9999)).padStart(4, '0');
+
+      // create an id for the composer
+      let compId =
+        '1' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
+
+      // add work based on input
+      try {
+        const workResponse = await Work.create({
+          id: workId,
+          title: title,
+          subtitle: '',
+          composer: {
+            id: compId,
+            name: compName,
+            complete_name: compComplete_name,
+            epoch: epoch
+          },
+          genre: genre
+        });
+        return workResponse;
+      } catch (e) {
+        return e;
+      }
+    },
+
+    // manually add piece with compId
+    customWorkCompId: async (parent, { title, compId, genre }) => {
+      // create an id for the work
+      let workId =
+        '9' + String(Math.floor(Math.random() * 9999)).padStart(4, '0');
+
+      let composerData;
+      try {
+        // search database for composerId (just in case it's a custom id)
+        const composerResponse = await Work.findOne({ 'composer.id': compId });
+        if (composerResponse) composerData = composerResponse.composer;
+        else {
+          // search openOpus for composer data
+          const openResponse = await fetch(
+            `https://api.openopus.org/composer/list/ids/${compId}.json`
+          );
+          const data = await openResponse.json();
+          composerData = data.composers[0];
+        }
+      } catch (e) {
+        console.log(e);
+      }
+
+      // add work based on input
+      try {
+        const workResponse = await Work.create({
+          id: workId,
+          title: title,
+          subtitle: '',
+          composer: {
+            id: compId,
+            name: composerData.name,
+            complete_name: composerData.complete_name,
+            epoch: composerData.epoch
+          },
+          genre: genre
+        });
+        return workResponse;
+      } catch (e) {
+        return e;
+      }
+    },
+
     // remove piece by id
     removeWork: async (parent, { workId }) => {
       try {

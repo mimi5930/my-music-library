@@ -11,12 +11,6 @@ const locationSchema = {
       type: Schema.Types.ObjectId,
       ref: 'Work'
     }
-  ],
-  currentWorks: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Work'
-    }
   ]
 };
 const Location = model('Location', locationSchema);

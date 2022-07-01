@@ -68,6 +68,18 @@ const typeDefs = gql`
 
   type Mutation {
     addWork(workId: String!): CollectedWorks
+    customWork(
+      title: String!
+      genre: String
+      compName: String!
+      compComplete_name: String
+      epoch: String
+    ): CollectedWorks
+    customWorkCompId(
+      title: String!
+      compId: String!
+      genre: String!
+    ): CollectedWorks
     removeWork(workId: String!): CollectedWorks
   }
 `;
