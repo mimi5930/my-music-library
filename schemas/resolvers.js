@@ -128,6 +128,16 @@ const resolvers = {
       }
     },
 
+    // delete location by id
+    deleteLocation: async (parent, { locId }) => {
+      try {
+        const locationResponse = await Location.findByIdAndDelete(locId);
+        return locationResponse;
+      } catch (error) {
+        return error;
+      }
+    },
+
     // add a work by id
     addWork: async (parent, { workId }) => {
       const workData = await fetch(

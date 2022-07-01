@@ -78,6 +78,7 @@ const typeDefs = gql`
   type Mutation {
     addLocation(name: String!): Location
     editLocation(locId: String, name: String!): Location
+    deleteLocation(locId: String): Location
     addWork(workId: String!): CollectedWorks
     customWork(
       title: String!
