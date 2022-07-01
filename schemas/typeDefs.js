@@ -56,9 +56,18 @@ const typeDefs = gql`
     works: [Works]
   }
 
+  type Location {
+    _id: String
+    name: String
+    works: [CollectedWorks]
+  }
+
   type Query {
     composer(name: String!): Composer
     works(compId: String!, title: String!): Work
+    locations: [Location]
+    locationId(locId: String!): Location
+    locationName(name: String!): Location
     dbWorks: [CollectedWorks]
     dbComposerId(compId: String!): [CollectedWorks]
     dbComposerName(name: String!): [CollectedWorks]
@@ -67,6 +76,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    addLocation(name: String!): Location
+    editLocation(locId: String, name: String!): Location
     addWork(workId: String!): CollectedWorks
     customWork(
       title: String!

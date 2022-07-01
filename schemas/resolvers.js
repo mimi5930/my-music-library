@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { Work } = require('../models');
+const { Work, Location } = require('../models');
 
 const resolvers = {
   Query: {
@@ -18,6 +18,35 @@ const resolvers = {
       );
       const data = await workData.json();
       return data;
+    },
+    // query locations
+    locations: async () => {
+      try {
+        const locationResponse = await Location.find();
+        return locationResponse;
+      } catch (error) {
+        return error;
+      }
+    },
+    // query location by Id
+    locationId: async (parent, { locId }) => {
+      try {
+        const locationResponse = await Location.findById(locId);
+        return locationResponse;
+      } catch (error) {
+        return error;
+      }
+    },
+    // query location by name
+    locationName: async (parent, { name }) => {
+      try {
+        const locationResponse = await Location.findOne({
+          name: new RegExp(name, 'i')
+        });
+        return locationResponse;
+      } catch (error) {
+        return error;
+      }
     },
     // query all pieces in database
     dbWorks: async () => {
@@ -75,7 +104,31 @@ const resolvers = {
     }
   },
   Mutation: {
-    // add a piece by id
+    // add a location
+    addLocation: async (parent, { name }) => {
+      try {
+        const locationResponse = await Location.create({ name: name });
+        return locationResponse;
+      } catch (e) {
+        return e;
+      }
+    },
+
+    // edit location name
+    editLocation: async (parent, { locId, name }) => {
+      try {
+        const locationResponse = await Location.findByIdAndUpdate(
+          locId,
+          { name: name },
+          { new: true }
+        );
+        return locationResponse;
+      } catch (e) {
+        return e;
+      }
+    },
+
+    // add a work by id
     addWork: async (parent, { workId }) => {
       const workData = await fetch(
         `https://api.openopus.org/work/detail/${workId}.json`
