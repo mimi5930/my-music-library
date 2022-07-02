@@ -35,6 +35,7 @@ const typeDefs = gql`
   }
 
   type CollectedWorks {
+    _id: String
     title: String
     subtitle: String
     id: ID
@@ -79,6 +80,7 @@ const typeDefs = gql`
     addLocation(name: String!): Location
     editLocation(locId: String, name: String!): Location
     deleteLocation(locId: String): Location
+
     addWork(workId: String!): CollectedWorks
     customWork(
       title: String!
@@ -92,8 +94,11 @@ const typeDefs = gql`
       compId: String!
       genre: String!
     ): CollectedWorks
-    removeWork(workId: String!): CollectedWorks
+    deleteWork(workId: String!): CollectedWorks
     editGenre(workId: String!, genre: String!): CollectedWorks
+
+    insertWork(workId: String!, locId: String!): Location
+    removeWork(workId: String!, locId: String!): Location
   }
 `;
 

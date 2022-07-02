@@ -22,7 +22,7 @@ const resolvers = {
     // query locations
     locations: async () => {
       try {
-        const locationResponse = await Location.find();
+        const locationResponse = await Location.find().populate('works');
         return locationResponse;
       } catch (error) {
         return error;
@@ -31,7 +31,9 @@ const resolvers = {
     // query location by Id
     locationId: async (parent, { locId }) => {
       try {
-        const locationResponse = await Location.findById(locId);
+        const locationResponse = await Location.findById(locId).populate(
+          'works'
+        );
         return locationResponse;
       } catch (error) {
         return error;
@@ -42,7 +44,7 @@ const resolvers = {
       try {
         const locationResponse = await Location.findOne({
           name: new RegExp(name, 'i')
-        });
+        }).populate('works');
         return locationResponse;
       } catch (error) {
         return error;
@@ -107,13 +109,14 @@ const resolvers = {
     // add a location
     addLocation: async (parent, { name }) => {
       try {
-        const locationResponse = await Location.create({ name: name });
+        const locationResponse = await (
+          await Location.create({ name: name })
+        ).populate('works');
         return locationResponse;
       } catch (e) {
         return e;
       }
     },
-
     // edit location name
     editLocation: async (parent, { locId, name }) => {
       try {
@@ -121,17 +124,18 @@ const resolvers = {
           locId,
           { name: name },
           { new: true }
-        );
+        ).populate('works');
         return locationResponse;
       } catch (e) {
         return e;
       }
     },
-
     // delete location by id
     deleteLocation: async (parent, { locId }) => {
       try {
-        const locationResponse = await Location.findByIdAndDelete(locId);
+        const locationResponse = await Location.findByIdAndDelete(
+          locId
+        ).populate('works');
         return locationResponse;
       } catch (error) {
         return error;
@@ -147,7 +151,6 @@ const resolvers = {
       if (data.status.success === 'false') {
         return false;
       }
-
       // add work to db
       try {
         const workResponse = await Work.create({
@@ -167,7 +170,6 @@ const resolvers = {
         return e;
       }
     },
-
     // manually add piece
     customWork: async (
       parent,
@@ -176,11 +178,9 @@ const resolvers = {
       // create an id for the work
       let workId =
         '9' + String(Math.floor(Math.random() * 9999)).padStart(4, '0');
-
       // create an id for the composer
       let compId =
         '1' + String(Math.floor(Math.random() * 999)).padStart(3, '0');
-
       // add work based on input
       try {
         const workResponse = await Work.create({
@@ -200,7 +200,6 @@ const resolvers = {
         return e;
       }
     },
-
     // manually add piece with compId
     customWorkCompId: async (parent, { title, compId, genre }) => {
       // create an id for the work
@@ -223,7 +222,6 @@ const resolvers = {
       } catch (e) {
         console.log(e);
       }
-
       // add work based on input
       try {
         const workResponse = await Work.create({
@@ -243,9 +241,8 @@ const resolvers = {
         return e;
       }
     },
-
     // remove piece by id
-    removeWork: async (parent, { workId }) => {
+    deleteWork: async (parent, { workId }) => {
       try {
         const workDbResponse = await Work.findOneAndDelete(
           { id: workId },
@@ -256,7 +253,7 @@ const resolvers = {
         return e;
       }
     },
-
+    // update work's genre
     editGenre: async (parent, { workId, genre }) => {
       try {
         const workDbResponse = await Work.findOneAndUpdate(
@@ -267,6 +264,38 @@ const resolvers = {
         return workDbResponse;
       } catch (e) {
         return e;
+      }
+    },
+
+    // insert work into location
+    insertWork: async (parent, { workId, locId }) => {
+      try {
+        const locationResponse = await Location.findOneAndUpdate(
+          { _id: locId },
+          {
+            $addToSet: { works: workId }
+          },
+          { new: true }
+        ).populate('works');
+        return locationResponse;
+      } catch (error) {
+        return error;
+      }
+    },
+
+    // remove work from location
+    removeWork: async (parent, { workId, locId }) => {
+      try {
+        const locationResponse = await Location.findOneAndUpdate(
+          { _id: locId },
+          {
+            $pull: { works: workId }
+          },
+          { new: true }
+        ).populate('works');
+        return locationResponse;
+      } catch (error) {
+        return error;
       }
     }
   }
